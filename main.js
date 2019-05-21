@@ -3,7 +3,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     $('#convertButton').click(copyToClipboard);
-    $('#post').keydown(textChanged);
+    $('#post').keyup(textChanged);
   });
 
   function processText(text, html) {
