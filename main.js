@@ -72,12 +72,20 @@
 
     // handle iOS as a special case
     if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
-      // convert to editable with readonly to stop iOS keyboard opening
       hiddenPostEl.contentEditable = true;
-      hiddenPostEl.readOnly = true;
-    }
+      hiddenPostEl.readOnly = false;
 
-    hiddenPostEl.select();
+      var range = document.createRange();
+      range.selectNodeContents(hiddenPostEl);
+
+      // select the range
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      hiddenPostEl.setSelectionRange(0, 999999);
+    } else {
+      hiddenPostEl.select();
+    }
 
     // execute copy command
     document.execCommand('copy');
