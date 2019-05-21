@@ -41,8 +41,8 @@
       'padding': '10px',
       'position': 'fixed',
       'top': 0,
-      'left': '50%',
-      'width': '50%',
+      'left': '25%',
+      'width': '500px',
     });
     messageBox.appendTo(document.body);
     return messageBox;
