@@ -49,6 +49,11 @@
       user-select: all;
       /* Likely future */
     }
+    #hiddenPost {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
   </style>
 </head>
 
@@ -58,7 +63,11 @@
     <h2>Clean & Beautiful Line Breaks for IG Captions!</h2>
 
     <div class="text">
-      <textarea id="post" cols="60" rows="12" contenteditable="true"></textarea>
+      <textarea id="post" cols="60" rows="12"></textarea>
+      <textarea id="hiddenPost"></textarea>
+    </div>
+
+      <button class="btn btn-default" id="convertButton">Convert & copy to clipboard</button>
     </div>
 
     <div id="output" class="output">

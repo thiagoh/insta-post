@@ -2,17 +2,24 @@
   'use strict';
 
   document.addEventListener('DOMContentLoaded', function () {
+    $('#convertButton').click(copyToClipboard);
     $('#post').keydown(textChanged);
   });
 
-  function textChanged() {
-    var el = $('#post');
-    var text = el.val();
-    text = text.replace(/\n/g, '<br />');
+  function processText(text, html) {
+    if (html) {
+      text = text.replace(/\n/g, '<br />');
+    }
     text = text.replace(/(?:\r\n|\r|\n)/g, "\u2063\n");
     // text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
     // text = text.replace(/\*(.*?)\*/g, '<i>$1</i>');
     // console.log(text);
+    return text;
+  }
+
+  function textChanged() {
+    var el = $('#post');
+    var text = processText(el.val(), true);
     $('#output').html(text);
   }
 
@@ -58,38 +65,19 @@
   }
 
   function copyToClipboard() {
-    var el = $('#post')[0];
-    var str = el.value;
-    str = str.replace(/(?:\r\n|\r|\n)/g, "\u2063\n");
-    el.value = str;
+    var el = $('#post');
+    var text = processText(el.val(), false);
+    var hiddenPostEl = $('#hiddenPost')[0];
+    hiddenPostEl.value = text;
 
     // handle iOS as a special case
     if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
-
-      // save current contentEditable/readOnly status
-      var editable = el.contentEditable;
-      var readOnly = el.readOnly;
-
       // convert to editable with readonly to stop iOS keyboard opening
-      el.contentEditable = true;
-      el.readOnly = true;
-
-      // create a selectable range
-      var range = document.createRange();
-      range.selectNodeContents(el);
-
-      // select the range
-      var selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      el.setSelectionRange(0, 999999);
-
-      // restore contentEditable/readOnly to original state
-      el.contentEditable = editable;
-      el.readOnly = readOnly;
-    } else {
-      el.select();
+      hiddenPostEl.contentEditable = true;
+      hiddenPostEl.readOnly = true;
     }
+
+    hiddenPostEl.select();
 
     // execute copy command
     document.execCommand('copy');
