@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+  <meta HTTP-EQUIV="EXPIRES" CONTENT="Mon, 22 Jul 2002 11:12:01 GMT">
+
+  <meta property="og:image:height" content="1257">
+  <meta property="og:image:width" content="2400">
+  <meta property="og:title" content="Line Break Generator for Instagram">
+  <meta property="og:description"
+    content="Make Clean Beautiful line breaks on Instagram without using annoying '&bull;' or '-' characters or emojis.">
+
+  <title>IG LineBreak Caption Generator</title>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="main.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+  <style>
+    body {
+      background-color: #fff;
+      color: #24292e;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .buttons * {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+      font-size: 14px;
+      margin-right: 15px;
+    }
+
+    #output {
+      -webkit-user-select: all;
+      /* Chrome 49+ */
+      -moz-user-select: all;
+      /* Firefox 43+ */
+      -ms-user-select: all;
+      /* No support yet */
+      user-select: all;
+      /* Likely future */
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Clean & Beautiful Line Breaks for IG Captions!</h2>
+
+    <div class="text">
+      <textarea id="post" cols="60" rows="12" contenteditable="true"></textarea>
+    </div>
+
+    <div id="output" class="output">
+    </div>
+  </div>
+</body>
+
+</html>
