@@ -4,22 +4,25 @@
   document.addEventListener('DOMContentLoaded', function () {
     $('#convertButton').click(copyToClipboard);
     $('#post').keyup(textChanged);
+    textChanged();
   });
 
-  function processText(text, html) {
-    if (html) {
-      text = text.replace(/\n/g, '<br />');
-    }
-    text = text.replace(/(?:\r\n|\r|\n)/g, "\u2063\n");
-    // text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-    // text = text.replace(/\*(.*?)\*/g, '<i>$1</i>');
-    // console.log(text);
+  function processText(text) {
+    text = text.split('\n')
+      .map(_ => _.replace(/^(\s*)(\-)/, "$1\u25B8 "))
+      .map(_ => _.replace(/^(\s*)(\*)/, "$1\u2022 "))
+      .join('\n');
+    text = text.replace(/[ \t]/g, "\u00A0");
+    text = text.replace(/\(c\)/g, "\u00A9");
+    text = text.replace(/\=>/g, "\u21D2");
+    text = text.replace(/\<=/g, "\u21D0");
+    text = text.replace(/\@/g, "\u0040");
     return text;
   }
 
   function textChanged() {
     var el = $('#post');
-    var text = processText(el.val(), true);
+    var text = processText(el.val());
     $('#output').html(text);
   }
 
@@ -66,7 +69,7 @@
 
   function copyToClipboard() {
     var el = $('#post');
-    var text = processText(el.val(), false);
+    var text = processText(el.val());
     var hiddenPostEl = $('#hiddenPost')[0];
     hiddenPostEl.value = text;
 
